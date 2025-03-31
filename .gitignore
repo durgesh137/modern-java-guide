@@ -1,3 +1,104 @@
-.idea/ # IntelliJ-specific
-target/ # Maven
+### --- Java ---
+# Compiled class files
+*.class
+
+# Build output
+target/
+build/
+out/
+bin/
+
+# Log files
+*.log
+
+# Package files
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+
+### --- IDE ---
+# IntelliJ IDEA
+.idea/
 *.iml
+*.iws
+*.ipr
+*.ids
+*.orig
+*.swp
+
+# VS Code
+.vscode/
+.settings/
+
+# Eclipse
+.settings/
+.project
+.classpath
+.metadata/
+
+### --- Build Tools ---
+# Maven
+pom.xml.versionsBackup
+dependency-reduced-pom.xml
+mvnw
+mvnw.cmd
+.mvn/
+
+# Gradle
+.gradle/
+gradle-app.setting
+gradlew
+gradlew.bat
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+### --- Database ---
+# H2 database files
+*.h2.db
+*.mv.db
+
+# Local SQLite
+*.db
+*.sqlite
+
+### --- OS & Env ---
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Linux
+*~
+
+### --- Spring Boot ---
+# Spring Boot DevTools
+/.spring-boot-devtools.*
+
+# Configuration
+/config/application*.properties
+/config/application*.yml
+/config/application*.json
+
+### --- Tests ---
+# JUnit
+/test-output/
+/target/surefire-reports/
+/target/failsafe-reports/
+
+# Jacoco
+/jacoco.exec
+/jacoco-data.exec
+
+### --- Other ---
+# Env files
+.env
+*.env
+
+# Temp files
+*.tmp
+*.bak
