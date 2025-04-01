@@ -52,3 +52,19 @@ public static boolean isValidUser(User user) {  // ✅ Method
     if (user.getName() == null) return false;
     return user.getAge() >= 18 && user.getAge() <= 120;
 }
+```
+## 3. Why effective final concept did not occur in below code
+```java
+        Predicate<Integer> isEven = ( x) -> x%2==0;
+        int num = 12;
+        boolean test = isEven.test(num);
+        System.out.println("Is "+num+" even? "+test);
+        num=11;
+        test = isEven.test(num);
+        System.out.println("Is "+num+" even? "+test);
+```
+## 3.1 Explanation:
+- Since num is just passed as an argument to test(), not captured by the lambda.
+- If the lambda referenced num (rather than just taking it as a parameter), then num would need to be effectively final.
+
+## 4.
