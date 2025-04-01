@@ -1,4 +1,4 @@
-package com.modernjava.guide.java8.core.lambdas.functionalInterfaces.predicates;
+package com.modernjava.guide.java8.core.lambdas.functionalInterfaces.predicates.level1;
 
 import java.util.function.Predicate;
 
