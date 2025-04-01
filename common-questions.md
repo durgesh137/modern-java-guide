@@ -67,4 +67,42 @@ public static boolean isValidUser(User user) {  // ✅ Method
 - Since num is just passed as an argument to test(), not captured by the lambda.
 - If the lambda referenced num (rather than just taking it as a parameter), then num would need to be effectively final.
 
-## 4.
+## 4. Stream Api operations
+Java 8 Stream api provides declaration way to process collections.
+It is divided into 3 main operations, namely-
+1. Source(e.g., List.stream(), Arrays.stream())
+2. Intermediate Operations(e.g., filter, map, sorted, distinct)
+3. Terminal Operations(e.g., collect, reduce, forEach, findFirst)
+
+### 4.1 Stream Pipeline structure
+```java
+List<Result> result = collection.stream()  // Source
+    .filter(x -> condition)              // Intermediate
+    .map(x -> transform)                 // Intermediate
+    .collect(Collectors.toList());       // Terminal
+```
+
+### 4.2 intermediate operations
+#### 4.2.1 filter(Predicate)	
+It Keeps elements matching a condition
+Format: .filter(n -> n % 2 == 0)
+
+#### 4.2.2 map(Function)	
+Transforms each element
+Format: .map(String::toUpperCase)
+
+#### 4.3 sorted()
+- Sorts elements
+Format: .sorted(Comparator.reverseOrder())
+
+#### 4.4 distinct()
+Removes duplicates
+Format: .distinct()
+
+#### 4.5 limit(n)
+Takes first n elements
+Format: .limit(5)
+
+#### 4.6 skip(n)
+Skips first n elements
+Format: .skip(2)
