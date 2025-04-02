@@ -116,14 +116,58 @@ It's a terminal operation, meaning it consumes the stream and produces a final v
 - This form takes an identity value and a binary operator. 
 - The identity value is the initial value for the reduction and is also returned if the stream is empty. 
 - This form returns a T.
+- Example-
+```java
+        List<Integer> nums = Arrays.asList(null);
+        // issue with below code, if only null value is present then, it will return 1
+        Integer product = nums.stream().filter(Objects::nonNull).reduce(1, (a, b) -> a * b);
+        System.out.println("Final Product: "+product);
+```
 
 2. reduce(BinaryOperator<T> accumulator):
 - This form takes a binary operator as an argument, which is a function that combines two elements of the stream into one. 
 - It returns an Optional<T> to handle cases where the stream is empty
+- Example-
+```java
+        List<Integer> nums = Arrays.asList(1,5,10,1, 0, null);
+        Optional<Integer> reduce = nums.stream().filter(Objects::nonNull)
+                .filter(n -> n != 0)
+                .reduce((a, b) -> a * b);
 
+```
 3. reduce(U identity, BiFunction<U, ? super T, U> accumulator, BinaryOperator<U> combiner):
 - This form is mostly used with parallel streams.
 - Three arguments include identity, accumulator, and combiner.
 - Accumulator combines accumulated value with stream element, and combiner merges result of multiple accumulators
 
 #### 4.3.2 
+
+## 5. Function interface format
+Function<T,R>
+- Here T is the type which arguments will be of defined function
+- R is the return type that we will get from function, 
+Example-
+```java
+@FunctionalInterface
+public interface Function<T, R> {
+    R apply(T t);  // Single abstract method
+}
+```
+
+## 6. BiFunction
+The BiFunction<T, U, R> is a functional interface introduced in Java 8 that represents a function that:
+- Accepts two input arguments of types T and U
+- Returns a result of type R
+
+Definition-
+```java
+@FunctionalInterface
+public interface BiFunction<T, U, R> {
+    R apply(T t, U u);  // Single abstract method
+}
+```
+### 6.1 Adding numbers
+```java
+BiFunction<Integer, Integer, Integer> add = (a, b) -> a + b;
+System.out.println(add.apply(5, 3));  // 8
+```
