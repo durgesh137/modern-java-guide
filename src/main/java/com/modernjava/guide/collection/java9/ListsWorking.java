@@ -4,10 +4,10 @@ import java.util.List;
 
 public class ListsWorking {
     public static void main(String[] args) {
-        workingWithArraysListMethod();
+        workingWithListOfMethod();
     }
 
-    private static void workingWithArraysListMethod() {
+    private static void workingWithListOfMethod() {
         List<Integer> nums = List.of(101, 901,5001, 400, 1, 9, 1000);
 
         // this is immutable list, ImmutableCollection
