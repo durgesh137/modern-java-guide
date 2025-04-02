@@ -1,4 +1,4 @@
-package com.modernjava.guide.java8.core.streams.level1;
+package com.modernjava.guide.java8.core.streams.exercises.level1;
 
 import java.util.Arrays;
 import java.util.List;

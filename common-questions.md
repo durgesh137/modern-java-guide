@@ -106,3 +106,24 @@ Format: .limit(5)
 #### 4.6 skip(n)
 Skips first n elements
 Format: .skip(2)
+
+### 4.3 Terminal operations
+#### 4.3.1 reduce operation
+The reduce operation in Java 8 combines elements of a stream into a single result. 
+It's a terminal operation, meaning it consumes the stream and produces a final value
+
+1. reduce(T identity, BinaryOperator<T> accumulator):
+- This form takes an identity value and a binary operator. 
+- The identity value is the initial value for the reduction and is also returned if the stream is empty. 
+- This form returns a T.
+
+2. reduce(BinaryOperator<T> accumulator):
+- This form takes a binary operator as an argument, which is a function that combines two elements of the stream into one. 
+- It returns an Optional<T> to handle cases where the stream is empty
+
+3. reduce(U identity, BiFunction<U, ? super T, U> accumulator, BinaryOperator<U> combiner):
+- This form is mostly used with parallel streams.
+- Three arguments include identity, accumulator, and combiner.
+- Accumulator combines accumulated value with stream element, and combiner merges result of multiple accumulators
+
+#### 4.3.2 
