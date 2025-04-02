@@ -7,7 +7,7 @@ import java.util.List;
 public class ReduceTerminalOperation {
     public static void main(String[] args) {
         List<Integer> nums = Arrays.asList(10, 90, 500, 400, 1, 9, 1000);
-        /**
+        /*
          * Understanding below statement
          * 1. start value for sum is 0, which is the Identity value.
          * 2. Integer::sum is equivalent to (a,b)-> a+b

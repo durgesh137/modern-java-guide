@@ -12,6 +12,13 @@ public class ProductNumbers {
         multipleListNumbersVersion1(nums);
         nums = Arrays.asList(null);
         multipleListNumbersVersion2WithOptional(nums);
+        multipleListNumbersVersion3(Arrays.asList(1,5,10,1, 0, null));
+    }
+
+    private static void multipleListNumbersVersion3(List<Integer> list) {
+        Optional<Integer> reduce = list.stream().filter(Objects::nonNull)
+                .filter(n -> n != 0)
+                .reduce((a, b) -> a * b);
     }
 
     private static void multipleListNumbersVersion2WithOptional(List<Integer> nums) {
