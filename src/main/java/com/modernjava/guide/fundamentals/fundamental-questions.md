@@ -17,3 +17,39 @@ void modifyOrder(Order order) {
 void reassignTheObject(Order order) {
     order = new Order(...); // caller's reference unchanged
 }
+```
+
+## Question 2 — Immutable class. How to create it further ensure its fields should not be modified?
+**Answer:** Immutable class within Java is a class whose objects can't  be modified after they are created.
+
+Rules for creating an Immutable class
+1. Define class using final keyword
+2. Make all its variables private and final, ensuring fields can be initialized within constructor and further can't be modified, not even within the class
+3. Further don't define setter methods
+4. Initialize all variables within the constructor.
+
+Example:
+```java
+public Person(String name, int age, List<String> contacts) {
+  this.name = name;
+  this.age = age;
+  this.contacts = contacts;
+}
+```
+NOTE- 
+1. with the above approach the contacts list can modified, since list is mutable field.
+2. It is recommended to perform deep cloning of modifiable fields or create unmodifiable fields.
+
+## Question 3- Design a fully immutable class. If the class contains a List<String>, and a getter provides access to this list, how can you prevent the list from being mutated by external code? (Suggest a solution other than Collections.immutableList).
+**Answer:** To prevent List<String> from being modified we can try below options-
+1. Within constructor create list using Collections.unmodifiableList by passing the list parameter.
+2. Whenever getter method for list is called, always return a copy of original list to prevent modification.
+
+Example:
+```java
+public PersonV2(String name, int age, List<String> contacts) {
+  this.name = name;
+  this.age = age;
+  this.contacts = Collections.unmodifiableList(new ArrayList<>(Objects.requireNonNull(contacts)));
+}
+```

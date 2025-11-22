@@ -2,6 +2,7 @@ package com.modernjava.guide;
 
 import com.modernjava.guide.dsa.linkedlist.LinkedListOperations;
 import com.modernjava.guide.fundamentals.q1.JavaPassByValueOrReference;
+import com.modernjava.guide.fundamentals.q2.ImmutableClass;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -13,7 +14,8 @@ public class ModernJavaGuideApplication {
 		SpringApplication.run(ModernJavaGuideApplication.class, args);
 		//uncommment lines to see the working
 //		LinkedListOperations.simulateLinkedList();
-		JavaPassByValueOrReference.conceptUnderstanding();
+//		JavaPassByValueOrReference.conceptUnderstanding();
+		ImmutableClass.workingWithImmutables();
 	}
 
 }
