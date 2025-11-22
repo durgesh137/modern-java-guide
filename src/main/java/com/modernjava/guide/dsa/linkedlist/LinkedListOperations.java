@@ -120,5 +120,19 @@ public class LinkedListOperations {
         LinkedListOperations.printLinkedList(head);
         head = LinkedListOperations.deleteKthNode(3,head);
         LinkedListOperations.printLinkedList(head);
+
+        Node headWithLoop = LinkedListOperations.generateLinkedListWithLoop();
+        LinkedListProblems.detectCycleWithinLinkedList(head);
+        LinkedListProblems.detectCycleWithinLinkedList(headWithLoop);
+    }
+
+    public static Node generateLinkedListWithLoop() {
+        Node head = getNewNode(10);
+        head.next = getNewNode(12);
+        head.next.next = getNewNode(15);
+        head.next.next.next = getNewNode(20);
+        Node tail = head.next.next.next;
+        tail.next = head;
+        return head;
     }
 }

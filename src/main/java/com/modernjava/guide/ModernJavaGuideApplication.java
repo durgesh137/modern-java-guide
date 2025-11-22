@@ -1,7 +1,6 @@
 package com.modernjava.guide;
 
 import com.modernjava.guide.dsa.linkedlist.LinkedListOperations;
-import com.modernjava.guide.dsa.linkedlist.Node;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
