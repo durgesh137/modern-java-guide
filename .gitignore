@@ -7,20 +7,23 @@ target/
 build/
 out/
 bin/
+dist/
 
 # Log files
 *.log
+*.log.*
 
-# Package files
+# Package files (build artifacts - don't commit to repo)
 *.jar
 *.war
 *.ear
 *.nar
 *.zip
 *.tar.gz
+!.mvn/wrapper/maven-wrapper.jar
 
-### --- IDE ---
-# IntelliJ IDEA
+### --- IDE (IntelliJ IDEA) ---
+# User-specific IntelliJ settings - SHOULD NOT BE COMMITTED
 .idea/
 *.iml
 *.iws
@@ -29,60 +32,176 @@ bin/
 *.orig
 *.swp
 
+# IntelliJ workspace file
+.idea/workspace.xml
+
+# IntelliJ tasks
+.idea/tasks.xml
+
+# IntelliJ dictionaries
+.idea/dictionaries/
+
+# Sensitive IntelliJ configs
+.idea/vcs.xml
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/.gitignore
+.idea/encodings.xml
+.idea/libraries/
+
+# IntelliJ run configurations (may contain local paths)
+.idea/runConfigurations/
+.idea/runConfigurations.xml
+
+# User-specific IntelliJ files
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+# AWS credentials (SECURITY: Never commit!)
+.idea/**/aws.xml
+
+# Database navigator
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+# Gradle plugin
+.idea/**/gradle.xml
+.idea/**/libraries
+
 # VS Code
 .vscode/
 .settings/
+*.code-workspace
 
 # Eclipse
 .settings/
 .project
 .classpath
 .metadata/
+.recommenders/
+.externalToolBuilders/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 
 ### --- Build Tools ---
 # Maven
 pom.xml.versionsBackup
+pom.xml.releaseBackup
+pom.xml.tag
 dependency-reduced-pom.xml
-mvnw
-mvnw.cmd
-.mvn/
+release.properties
+
+# Maven wrapper (KEEP mvnw and mvnw.cmd - they should be committed!)
+# Only ignore the wrapper jar downloaded at runtime
+.mvn/wrapper/maven-wrapper.jar
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.properties
 
 # Gradle
 .gradle/
 gradle-app.setting
-gradlew
-gradlew.bat
 build/
 !gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
 
 ### --- Database ---
 # H2 database files
 *.h2.db
 *.mv.db
+*.trace.db
 
 # Local SQLite
 *.db
 *.sqlite
+*.sqlite3
 
-### --- OS & Env ---
+# Derby
+derby.log
+
+### --- OS & Environment ---
 # Mac
 .DS_Store
+.AppleDouble
+.LSOverride
+._*
 
 # Windows
 Thumbs.db
+Thumbs.db:encryptable
 ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
 
 # Linux
 *~
+.directory
+.Trash-*
+
+### --- Security & Secrets (NEVER COMMIT!) ---
+# Environment variables with secrets
+.env
+.env.local
+.env.*.local
+*.env
+secrets.properties
+secrets.yml
+secrets.yaml
+
+# SSH keys
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+
+# AWS credentials
+.aws/
+aws-credentials*
+credentials.json
+
+# GCP credentials
+*-gcp-key.json
+gcp-credentials*
+
+# API keys and tokens
+*apikey*
+*api-key*
+*token*
+*secret*
+
+# Configuration files with secrets
+application-secrets.properties
+application-secrets.yml
+application-secrets.yaml
+application-local.properties
+application-local.yml
+application-local.yaml
 
 ### --- Spring Boot ---
 # Spring Boot DevTools
 /.spring-boot-devtools.*
+spring-boot-devtools.properties
 
-# Configuration
-/config/application*.properties
-/config/application*.yml
-/config/application*.json
+# Application configuration (may contain sensitive data)
+/config/application-local.properties
+/config/application-local.yml
+/config/application-secrets.*
 
 ### --- Tests ---
 # JUnit
@@ -93,12 +212,61 @@ ehthumbs.db
 # Jacoco
 /jacoco.exec
 /jacoco-data.exec
+*.exec
 
-### --- Other ---
-# Env files
-.env
-*.env
+# Test coverage reports
+/coverage/
+/.nyc_output/
 
+### --- Documentation (Generated) ---
+# JavaDoc
+/doc/
+/javadoc/
+
+# API docs (if auto-generated)
+/api-docs/
+
+### --- Temporary & Cache Files ---
 # Temp files
 *.tmp
+*.temp
 *.bak
+*.backup
+*.cache
+*.swp
+*.swo
+*~.nib
+
+# Cache directories
+.cache/
+.m2/repository/
+node_modules/
+.npm/
+
+# Logs
+logs/
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+### --- Project Specific ---
+# Backup source code (already in git)
+src-root-backup/
+
+# Generated files
+generated/
+generated-sources/
+generated-test-sources/
+
+### --- Other ---
+# Compressed files
+*.gz
+*.rar
+*.7z
+
+# Archives
+*.tar
+
+# System files
+.fuse_hidden*

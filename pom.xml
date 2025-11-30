@@ -11,69 +11,297 @@
 	<groupId>com.modernjava</groupId>
 	<artifactId>modern-java-guide</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>modern-java-guide</name>
-	<description>A guide to modern java features with springboot examples</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
+	<description>A guide to modern java features with multiple modules targeting different Java versions</description>
+
+	<modules>
+		<module>java8</module>
+		<module>java9</module>
+		<module>java10</module>
+		<module>java11</module>
+		<module>java12</module>
+		<module>java13</module>
+		<module>java14</module>
+		<module>java15</module>
+		<module>java16</module>
+		<module>java17</module>
+		<module>java18</module>
+		<module>java19</module>
+		<module>java20</module>
+		<module>java21</module>
+		<module>java22</module>
+		<module>java23</module>
+		<module>java24</module>
+		<module>java25</module>
+	</modules>
+
 	<properties>
 		<java.version>17</java.version>
+		<!-- default compiler source/target - can be overridden by modules or profiles -->
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
 	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
 
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
+	<!-- keep helpful build plugin configuration inherited by modules -->
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.11.0</version>
+					<configuration>
+						<!-- use source/target instead of release for better JDK compatibility -->
+						<source>${maven.compiler.source}</source>
+						<target>${maven.compiler.target}</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.4.2</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<!-- mainClass should be overridden in each module -->
+								<mainClass>com.modernjava.guide.Main</mainClass>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
+				<!-- Maven Toolchains plugin remains for optional toolchain use -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-toolchains-plugin</artifactId>
+					<version>3.1.0</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>toolchain</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<toolchains>
+							<jdk>
+								<version>17</version>
+							</jdk>
+						</toolchains>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
+
+	<!--
+	  Per-module profiles: activate one to build only that module, e.g.
+	    mvn -Pbuild-java8 clean package
+	  Each profile overrides maven.compiler.source/target so the compiler uses the correct version.
+	-->
+	<profiles>
+		<profile>
+			<id>build-java8</id>
+			<activation/>
+			<properties>
+				<maven.compiler.source>1.8</maven.compiler.source>
+				<maven.compiler.target>1.8</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java8</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java9</id>
+			<properties>
+				<maven.compiler.source>9</maven.compiler.source>
+				<maven.compiler.target>9</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java9</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java10</id>
+			<properties>
+				<maven.compiler.source>10</maven.compiler.source>
+				<maven.compiler.target>10</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java10</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java11</id>
+			<properties>
+				<maven.compiler.source>11</maven.compiler.source>
+				<maven.compiler.target>11</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java11</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java12</id>
+			<properties>
+				<maven.compiler.source>12</maven.compiler.source>
+				<maven.compiler.target>12</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java12</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java13</id>
+			<properties>
+				<maven.compiler.source>13</maven.compiler.source>
+				<maven.compiler.target>13</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java13</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java14</id>
+			<properties>
+				<maven.compiler.source>14</maven.compiler.source>
+				<maven.compiler.target>14</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java14</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java15</id>
+			<properties>
+				<maven.compiler.source>15</maven.compiler.source>
+				<maven.compiler.target>15</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java15</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java16</id>
+			<properties>
+				<maven.compiler.source>16</maven.compiler.source>
+				<maven.compiler.target>16</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java16</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java17</id>
+			<properties>
+				<maven.compiler.source>17</maven.compiler.source>
+				<maven.compiler.target>17</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java17</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java18</id>
+			<properties>
+				<maven.compiler.source>18</maven.compiler.source>
+				<maven.compiler.target>18</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java18</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java19</id>
+			<properties>
+				<maven.compiler.source>19</maven.compiler.source>
+				<maven.compiler.target>19</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java19</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java20</id>
+			<properties>
+				<maven.compiler.source>20</maven.compiler.source>
+				<maven.compiler.target>20</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java20</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java21</id>
+			<properties>
+				<maven.compiler.source>21</maven.compiler.source>
+				<maven.compiler.target>21</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java21</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java22</id>
+			<properties>
+				<maven.compiler.source>22</maven.compiler.source>
+				<maven.compiler.target>22</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java22</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java23</id>
+			<properties>
+				<maven.compiler.source>23</maven.compiler.source>
+				<maven.compiler.target>23</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java23</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java24</id>
+			<properties>
+				<maven.compiler.source>24</maven.compiler.source>
+				<maven.compiler.target>24</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java24</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>build-java25</id>
+			<properties>
+				<maven.compiler.source>25</maven.compiler.source>
+				<maven.compiler.target>25</maven.compiler.target>
+			</properties>
+			<modules>
+				<module>java25</module>
+			</modules>
+		</profile>
+	</profiles>
 
 </project>
