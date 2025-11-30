@@ -95,7 +95,7 @@ If you need Lombok in a specific module:
 
 ---
 
-### Error 3: Invalid flag: --release
+### Error 3: Invalid flag: --release (Java 8)
 
 **Error Message:**
 ```
@@ -104,30 +104,48 @@ on project java8: Fatal error compiling: invalid flag: --release
 ```
 
 **Cause:**
-- Maven running with JDK 8 which doesn't support `--release` flag
-- `--release` flag introduced in Java 9
+- The `--release` flag is not supported in Java 8
+- `--release` flag was introduced in Java 9
+- Using `maven.compiler.release` property triggers this flag
 
 **Solution:**
-This error has been **FIXED**. Project now uses `<source>/<target>` instead of `<release>`.
+This error has been **FIXED** in the java8 module (as of Nov 30, 2025).
 
-If you still encounter it in custom modules:
+The java8 module now uses `maven.compiler.source` and `maven.compiler.target` instead of `maven.compiler.release`.
 
-**Change from:**
+**Fixed configuration in java8/pom.xml:**
 ```xml
-<configuration>
-    <release>8</release>
-</configuration>
+<properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
 ```
 
-**To:**
+**If you encounter this in other modules or custom code:**
+
+Replace:
 ```xml
-<configuration>
-    <source>1.8</source>
-    <target>1.8</target>
-</configuration>
+<properties>
+    <maven.compiler.release>8</maven.compiler.release>
+</properties>
 ```
 
-**Status:** ✅ RESOLVED
+With:
+```xml
+<properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
+```
+
+**Verify the fix:**
+```bash
+cd java8
+mvn clean compile
+# Should build successfully
+```
+
+**Status:** ✅ RESOLVED (Fixed in java8 module)
 
 ---
 
