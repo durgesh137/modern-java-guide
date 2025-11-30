@@ -104,17 +104,20 @@
 	  Each profile overrides maven.compiler.source/target so the compiler uses the correct version.
 	-->
 	<profiles>
-		<profile>
-			<id>build-java8</id>
-			<activation/>
-			<properties>
-				<maven.compiler.source>1.8</maven.compiler.source>
-				<maven.compiler.target>1.8</maven.compiler.target>
-			</properties>
-			<modules>
-				<module>java8</module>
-			</modules>
-		</profile>
+	<profile>
+		<id>build-java8</id>
+		<activation/>
+		<properties>
+			<!-- Override Spring Boot parent's maven.compiler.release property -->
+			<!-- Java 8 does not support the release flag, so we unset it and use source/target -->
+			<maven.compiler.release></maven.compiler.release>
+			<maven.compiler.source>1.8</maven.compiler.source>
+			<maven.compiler.target>1.8</maven.compiler.target>
+		</properties>
+		<modules>
+			<module>java8</module>
+		</modules>
+	</profile>
 
 		<profile>
 			<id>build-java9</id>

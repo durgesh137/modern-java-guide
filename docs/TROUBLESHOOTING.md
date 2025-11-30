@@ -95,7 +95,7 @@ If you need Lombok in a specific module:
 
 ---
 
-### Error 3: Invalid flag: --release
+### Error 3: Invalid flag: --release (Java 8)
 
 **Error Message:**
 ```
@@ -104,30 +104,84 @@ on project java8: Fatal error compiling: invalid flag: --release
 ```
 
 **Cause:**
-- Maven running with JDK 8 which doesn't support `--release` flag
-- `--release` flag introduced in Java 9
+- The `--release` flag is not supported in Java 8
+- `--release` flag was introduced in Java 9
+- Spring Boot Starter Parent (version 3.4.4) sets `maven.compiler.release=17` by default
+- This property takes precedence over `maven.compiler.source` and `maven.compiler.target`
 
 **Solution:**
-This error has been **FIXED**. Project now uses `<source>/<target>` instead of `<release>`.
+This error has been **FIXED** in the java8 module (as of Nov 30, 2025).
 
-If you still encounter it in custom modules:
+The java8 module now **explicitly overrides** `maven.compiler.release` by setting it to empty, which forces Maven to use `maven.compiler.source` and `maven.compiler.target` instead.
 
-**Change from:**
+**Fixed configuration in java8/pom.xml:**
 ```xml
-<configuration>
-    <release>8</release>
-</configuration>
+<properties>
+    <!-- Override Spring Boot parent's maven.compiler.release property -->
+    <!-- Java 8 does not support the release flag, so we unset it and use source/target -->
+    <maven.compiler.release></maven.compiler.release>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
 ```
 
-**To:**
+**Same fix in build-java8 profile in parent pom.xml:**
 ```xml
-<configuration>
-    <source>1.8</source>
-    <target>1.8</target>
-</configuration>
+<profile>
+    <id>build-java8</id>
+    <properties>
+        <maven.compiler.release></maven.compiler.release>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+    <modules>
+        <module>java8</module>
+    </modules>
+</profile>
 ```
 
-**Status:** ✅ RESOLVED
+**Root Cause:**
+The issue was caused by inheriting from Spring Boot Starter Parent 3.4.4, which sets:
+```xml
+<maven.compiler.release>17</maven.compiler.release>
+```
+
+This property causes the compiler plugin to use the `--release 17` flag, which is:
+1. Not supported in Java 8 compiler
+2. Takes precedence over `source` and `target` properties
+
+**Verify the fix:**
+```bash
+cd java8
+mvn clean package
+# Should build successfully
+
+# Run the JAR
+java -jar target/java8-0.0.1-SNAPSHOT.jar
+# Should print: Module: java8 - runtime java.version=X
+```
+
+**If you encounter this in other modules:**
+
+For any module targeting Java 8, add this to the module's `pom.xml`:
+```xml
+<properties>
+    <maven.compiler.release></maven.compiler.release>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
+```
+
+**Expected Warnings (safe to ignore):**
+```
+[WARNING] bootstrap class path is not set in conjunction with -source 8
+[WARNING] source value 8 is obsolete and will be removed in a future release
+[WARNING] target value 8 is obsolete and will be removed in a future release
+```
+
+These are just warnings when building with a newer JDK (e.g., Java 25) targeting an older version (Java 8). The code compiles correctly and runs fine.
+
+**Status:** ✅ RESOLVED (Fixed in java8 module - Nov 30, 2025)
 
 ---
 
