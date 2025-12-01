@@ -1,4 +1,4 @@
-package com.modernjava.guide.java8.Q001_print_numbers;
+package com.modernjava.guide.java8.Q002_print_evens;
 
 import com.modernjava.guide.java8.util.ComparisonUtils;
 
@@ -6,34 +6,35 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Q001: Print All Numbers in a List
+ * Q002: Print Even Numbers in a List
  *
- * Problem: Given a list of integers, print all numbers.
+ * Problem: Given a list of integers, print only even numbers.
  *
  * This comparison demonstrates:
- * - Traditional approach using for-each loop
- * - Stream API approach using forEach()
+ * - Traditional approach using for-each loop with if condition
+ * - Stream API approach using filter() and forEach()
  * - Performance comparison
  * - Code readability comparison
  */
-public class PrintNumbersComparison {
+public class PrintEvensComparison {
 
     public static void main(String[] args) {
         List<Integer> numbers = Arrays.asList(1, 2, 1, 3, 2, 4, 5, 6, 2, 2, 7, 8, 4, 9, 10,1, 2, 1, 3, 2, 4, 5, 6, 2, 2, 7, 8, 4, 9, 10);
 
         System.out.println(ComparisonUtils.repeat("=", 80));
-        System.out.println("Q001: Print All Numbers in a List");
+        System.out.println("Q002: Print Even Numbers in a List");
         System.out.println(ComparisonUtils.repeat("=", 80));
         System.out.println("Input: " + numbers);
         System.out.println("Size: " + numbers.size() + " elements");
         System.out.println();
 
         // Test Case 1: Traditional Approach
-        System.out.println("APPROACH 1: Traditional (For-Each Loop)");
+        System.out.println("APPROACH 1: Traditional (For-Each Loop with If Condition)");
         System.out.println(ComparisonUtils.repeat("-", 80));
         System.out.println("Code:");
         System.out.println("  for (Integer number : numbers) {");
-        System.out.println("      System.out.print(number + \",\");");
+        System.out.println("      if(number % 2 == 0)");
+        System.out.println("          System.out.print(number + \",\");");
         System.out.println("  }");
         System.out.println();
         System.out.print("Output: ");
@@ -47,11 +48,12 @@ public class PrintNumbersComparison {
         System.out.println();
 
         // Test Case 2: Stream API Approach
-        System.out.println("APPROACH 2: Stream API (forEach with Method Reference)");
+        System.out.println("APPROACH 2: Stream API (filter() with forEach())");
         System.out.println(ComparisonUtils.repeat("-", 80));
         System.out.println("Code:");
         System.out.println("  numbers.stream()");
-        System.out.println("         .forEach(System.out::println);");
+        System.out.println("         .filter(n -> n % 2 == 0)");
+        System.out.println("         .forEach(n -> System.out.print(n + \",\"));");
         System.out.println();
         System.out.println("Output: ");
 
@@ -67,17 +69,17 @@ public class PrintNumbersComparison {
         System.out.println("APPROACH 3: Stream API Variations");
         System.out.println(ComparisonUtils.repeat("-", 80));
 
-        System.out.println("a) Using lambda expression:");
-        System.out.println("   numbers.stream().forEach(n -> System.out.println(n));");
+        System.out.println("a) Using method reference for printing:");
+        System.out.println("   numbers.stream().filter(n -> n % 2 == 0).forEach(System.out::println);");
         System.out.print("   Output: ");
-        numbers.stream().forEach(n -> System.out.print(n + ","));
+        numbers.stream().filter(n -> n % 2 == 0).forEach(n -> System.out.print(n + ","));
         System.out.println();
         System.out.println();
 
         System.out.println("b) Using lambda with custom formatting:");
-        System.out.println("   numbers.stream().forEach(n -> System.out.print(\"[\" + n + \"] \"));");
+        System.out.println("   numbers.stream().filter(n -> n % 2 == 0).forEach(n -> System.out.print(\"[\" + n + \"] \"));");
         System.out.print("   Output: ");
-        numbers.stream().forEach(n -> System.out.print("[" + n + "] "));
+        numbers.stream().filter(n -> n % 2 == 0).forEach(n -> System.out.print("[" + n + "] "));
         System.out.println();
         System.out.println();
 
@@ -93,20 +95,23 @@ public class PrintNumbersComparison {
     }
 
     /**
-     * Traditional approach: Print all numbers using for-each loop
+     * Traditional approach: Print even numbers using for-each loop with if condition
      */
     private static void printTraditional(List<Integer> numbers) {
         for (Integer number : numbers) {
-            System.out.print(number + ",");
+            if(number % 2 == 0)
+                System.out.print(number + ",");
         }
         System.out.println();
     }
 
     /**
-     * Stream API approach: Print all numbers using forEach with method reference
+     * Stream API approach: Print even numbers using filter() and forEach()
      */
     private static void printStream(List<Integer> numbers) {
-        numbers.stream().forEach(n -> System.out.print(n + ","));
+        numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .forEach(n -> System.out.print(n + ","));
         System.out.println();
     }
 
@@ -164,8 +169,10 @@ public class PrintNumbersComparison {
      */
     private static void printTraditionalSilent(List<Integer> numbers) {
         for (Integer number : numbers) {
-            // No output for performance testing
-            number.toString();
+            if(number % 2 == 0) {
+                // No output for performance testing
+                number.toString();
+            }
         }
     }
 
@@ -173,8 +180,11 @@ public class PrintNumbersComparison {
      * Silent version for performance testing (no output)
      */
     private static void printStreamSilent(List<Integer> numbers) {
-        numbers.stream().forEach(n -> n.toString());
+        numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .forEach(n -> n.toString());
     }
+
 
     /**
      * Print comprehensive summary
@@ -210,11 +220,13 @@ public class PrintNumbersComparison {
         System.out.println();
 
         System.out.println("KEY LEARNINGS:");
-        System.out.println("  • Both produce identical output");
+        System.out.println("  • Both produce identical output (only even numbers)");
+        System.out.println("  • filter() is a key intermediate operation in Stream API");
+        System.out.println("  • Traditional approach uses explicit if condition");
         System.out.println("  • Stream API is more readable and maintainable");
         System.out.println("  • Performance difference is negligible for most use cases");
         System.out.println("  • Stream API shines when combined with other operations (filter, map, etc.)");
-        System.out.println("  • Method references (::) make code even more concise");
+        System.out.println("  • Lambda expressions (n -> n % 2 == 0) make filtering concise");
         System.out.println();
 
         System.out.println("WHEN TO USE:");

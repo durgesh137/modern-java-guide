@@ -10,29 +10,6 @@ For a problem named `XYZ`, create three files:
 2. `XYZStream.java` - Java 8 Stream API solution
 3. `XYZComparison.java` - Runner that compares both approaches
 
-## Problem Ideas to Implement
-
-### Easy
-- [ ] Find max/min element
-- [ ] Remove duplicates from list
-- [ ] Count occurrences of element
-- [ ] Convert list to uppercase strings
-- [ ] Check if any/all elements match condition
-
-### Medium
-- [ ] Group strings by length
-- [ ] Find top K frequent elements
-- [ ] Flatten nested lists
-- [ ] Partition list into even/odd
-- [ ] Calculate average of filtered numbers
-
-### Hard
-- [ ] Find longest increasing subsequence length
-- [ ] Custom grouping with multiple criteria
-- [ ] Complex transformations with multiple maps
-- [ ] Parallel processing optimization
-- [ ] Custom collectors
-
 ## Best Practices
 
 1. **Always handle null/empty inputs** gracefully
