@@ -1,5 +1,16 @@
 # Module: java8
 
+## 📚 Documentation
+
+- **[PROBLEMS.md](PROBLEMS.md)** - Problem statements and concepts covered
+- **[LEARNING_STRUCTURE.md](LEARNING_STRUCTURE.md)** - Complete learning guide and project structure
+- **[PROBLEM_TEMPLATE.md](PROBLEM_TEMPLATE.md)** - Template for adding new problems
+- **[Troubleshoot.md](Troubleshoot.md)** - Common errors and solutions
+
+---
+
+## Quick Start
+
 This module targets Java 8 and uses the centralized compiler configuration from the root `pom.xml`.
 
 If your IDE shows duplicate plugin entries (for example `maven-compiler-plugin[2]`) or stale Maven configuration, refresh the Maven project to force the IDE to re-read the effective POM.
@@ -61,6 +72,23 @@ mvn -Pbuild-java8 clean package
 ./scripts/generate-toolchains-macos.sh --apply
 ```
 
+---
+
+## 🚀 Quick Commands
+
+```bash
+# Compile the module
+mvn -pl java8 clean compile
+
+# Run Q001: Print Numbers Comparison
+mvn -pl java8 exec:java -Dexec.mainClass="com.modernjava.java8.problems.collections.Q001_print_numbers.PrintNumbersComparison"
+
+# Run Filter and Sum Comparison
+mvn -pl java8 exec:java -Dexec.mainClass="com.modernjava.java8.comparisons.FilteringSolutionsComparison"
+```
+
+---
+
 ## Project Structure
 
 This module is organized to help you learn Stream API by comparing it with traditional approaches:
@@ -68,22 +96,20 @@ This module is organized to help you learn Stream API by comparing it with tradi
 
 ### Learning Approach
 
+**See [PROBLEMS.md](PROBLEMS.md) for complete list of problems and concepts covered.**
+
 Each problem demonstrates:
 1. **Traditional Solution** - Pre-Java 8 imperative style with loops
 2. **Stream Solution** - Java 8+ functional style with Stream API
 3. **Comparison Runner** - Side-by-side execution with performance metrics
 
 Example problems:
-- **Filter and Sum**: Basic filtering and aggregation operations
-- **Sum of Squares of Odd Numbers**: Combining filter, map, and reduce operations
-- More coming soon...
+- **Q001: Print Numbers** - forEach(), method references, lambda expressions (WORKING)
+- **Q002: Sum of Squares** - filter(), map(), reduce() (INCOMPLETE - needs Stream version)
 
-### Running Examples
+**For detailed structure:** See [LEARNING_STRUCTURE.md](LEARNING_STRUCTURE.md)
 
-```bash
-# Compile the module
-mvn -pl java8 clean compile
-```
+---
 
 ## Java 8 Features & Resources
 
@@ -99,6 +125,8 @@ Key topics to explore:
 Additional resources:
 - Java learning path: https://docs.oracle.com/javase/tutorial/tutorialLearningPaths.html
 - Java 8 documentation: https://docs.oracle.com/javase/8/index.html
+
+**Having issues?** Check [Troubleshoot.md](Troubleshoot.md) for common errors and solutions.
 - GC tuning: https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/
 
 Notes:
