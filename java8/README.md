@@ -61,6 +61,46 @@ mvn -Pbuild-java8 clean package
 ./scripts/generate-toolchains-macos.sh --apply
 ```
 
+## Project Structure
+
+This module is organized to help you learn Stream API by comparing it with traditional approaches:
+
+
+### Learning Approach
+
+Each problem demonstrates:
+1. **Traditional Solution** - Pre-Java 8 imperative style with loops
+2. **Stream Solution** - Java 8+ functional style with Stream API
+3. **Comparison Runner** - Side-by-side execution with performance metrics
+
+Example problems:
+- **Filter and Sum**: Basic filtering and aggregation operations
+- **Sum of Squares of Odd Numbers**: Combining filter, map, and reduce operations
+- More coming soon...
+
+### Running Examples
+
+```bash
+# Compile the module
+mvn -pl java8 clean compile
+```
+
+## Java 8 Features & Resources
+
+Features newly included within Java 8: https://www.oracle.com/java/technologies/javase/8-whats-new.html
+
+Key topics to explore:
+- **Stream API**: https://docs.oracle.com/javase/tutorial/collections/streams/
+- **Lambda Expressions**: Functional interfaces and method references
+- **Optional**: Better null handling
+- **Date/Time API**: Modern date and time handling
+- **Default Methods**: Interface evolution
+
+Additional resources:
+- Java learning path: https://docs.oracle.com/javase/tutorial/tutorialLearningPaths.html
+- Java 8 documentation: https://docs.oracle.com/javase/8/index.html
+- GC tuning: https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/
+
 Notes:
 - If you use the `release` compiler flag (the default in this repo), make sure Maven runs with a JDK version that supports that `--release` value or configure toolchains to supply the correct JDK to the compiler plugin.
 - See `docs/TOOLCHAINS.md` for more details.
