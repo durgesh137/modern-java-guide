@@ -37,6 +37,8 @@ java8/
 │                   │   ├── PrintStringsComparison.java          # ✅ Complete
 │                   │   ├── PrintStringsStream.java              # ✅ Complete
 │                   │   └── PrintStringsTraditional.java         # ✅ Complete
+│                   ├── Q006_count_evens_odds/
+│                   │   └── CountEvensOddsComparison.java        # ✅ Complete (Single class)
 │                   └── util/
 │                       └── ComparisonUtils.java                 # ✅ Shared utilities
 └── target/                          # Compiled output (not tracked in git)
@@ -105,6 +107,21 @@ java8/
 
 ---
 
+### Q006: Count Even and Odd Numbers
+**Location:** `com.modernjava.guide.java8.Q006_count_evens_odds`  
+**Concepts:** count(), filter(), predicates, single-pass iteration  
+**Problem:** Count how many even and odd numbers are in an array  
+**Input:** `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`  
+**Output:** `Even count: 5, Odd count: 5`  
+**Implementation:** ✅ `CountEvensOddsComparison.java` - **Single class with both approaches**  
+**Methods:**
+  - `countTraditional()` - Single for loop counting both even/odd
+  - `countStream()` - Two separate stream pipelines with filter().count()
+**Test Cases:** 10, 1K, 100K elements  
+**Note:** This demonstrates the **single-class approach** for simple problems - all code in one file
+
+---
+
 ## 🛠️ Utility Classes
 
 ### ComparisonUtils
@@ -138,6 +155,7 @@ java8/
 - When to use each approach
 - Handling edge cases (empty arrays, single elements)
 - Output suppression for large datasets in performance testing
+- **Single-class approach** for simple problems (Q006+)
 
 ### Java 8 Features Demonstrated
 - ✅ Lambda expressions
@@ -146,6 +164,7 @@ java8/
 - ✅ Functional interfaces
 - ✅ Optional (in max/min operations)
 - ✅ String filtering and predicates
+- ✅ Counting with filter().count()
 
 ---
 
@@ -156,6 +175,7 @@ Based on benchmark results in comparison classes:
 - **Large arrays (10,000+ elements):** Stream performance improves, gap narrows
 - **Very large arrays (1,000,000+ elements):** Traditional still edges out for simple operations
 - **String operations:** Similar patterns - traditional loops excel for simple contains() checks
+- **Counting operations:** Traditional single-pass is more efficient than multiple stream pipelines
 - **Takeaway:** Use Streams for readability and composition, not raw speed in tight loops
 
 ---
@@ -163,11 +183,11 @@ Based on benchmark results in comparison classes:
 ## 🚧 Planned Problems
 
 ### Easy
-- Q006: Count even vs odd numbers
 - Q007: Remove duplicates from array
 - Q008: Convert all strings to uppercase
 - Q009: Find average of numbers
 - Q010: Check if any element matches a condition
+- Q011: Sum all positive numbers
 
 ### Medium
 - Q011: Group strings by length

@@ -30,6 +30,7 @@ java8/
 │                   ├── Q003_square_nums/            # ✅ Sum of squares
 │                   ├── Q004_max_min/                # ✅ Find max & min
 │                   ├── Q005_print_string/           # ✅ Filter strings by substring
+│                   ├── Q006_count_evens_odds/       # ✅ Count even/odd (single class)
 │                   └── util/
 │                       └── ComparisonUtils.java     # ✅ Shared utilities
 └── target/                          # Compiled output (gitignored)
@@ -66,6 +67,9 @@ mvn -pl java8 exec:java -Dexec.mainClass="com.modernjava.guide.java8.Q004_max_mi
 
 # Run Q005: Filter Strings
 mvn -pl java8 exec:java -Dexec.mainClass="com.modernjava.guide.java8.Q005_print_string.PrintStringsComparison"
+
+# Run Q006: Count Even/Odd
+mvn -pl java8 exec:java -Dexec.mainClass="com.modernjava.guide.java8.Q006_count_evens_odds.CountEvensOddsComparison"
 ```
 
 ---
@@ -110,12 +114,13 @@ mvn -pl java8 exec:java -Dexec.mainClass="com.modernjava.guide.java8.Q005_print_
 
 ## 📊 Current Status
 
-### Completed Problems (5/5)
+### Completed Problems (6/6)
 - ✅ **Q001:** Print All Numbers - Stream basics, forEach(), method references
 - ✅ **Q002:** Print Even Numbers - filter(), predicates
 - ✅ **Q003:** Sum of Squares - map(), sum(), transformations
 - ✅ **Q004:** Max & Min - max(), min(), Optional handling
 - ✅ **Q005:** Filter Strings by Substring - filter(), contains(), String operations
+- ✅ **Q006:** Count Even/Odd Numbers - count(), filter() (single-class approach)
 
 ### Utility Classes
 - ✅ **ComparisonUtils** - Shared helpers (repeat, formatTime, printNumbers, printStrings, getArrayOfSpecifiedSize, getStringArrayWithPatternAtEnd)
@@ -126,6 +131,10 @@ See **[PROBLEMS.md](PROBLEMS.md)** for detailed problem statements and concepts 
 
 ## 🎓 Learning Approach
 
+**Two implementation patterns:**
+1. **Multi-file approach (Q001-Q005):** Separate Traditional/Stream/Comparison classes
+2. **Single-class approach (Q006+):** All methods in one comparison class - better for simple problems
+
 Each problem demonstrates:
 1. **Traditional Approach** - Classic Java loops and conditionals
 2. **Stream Approach** - Java 8 Stream API with lambdas
@@ -134,7 +143,7 @@ Each problem demonstrates:
 ### Key Concepts Covered
 - Lambda expressions: `n -> n % 2 == 0`, `n -> n.contains(substring)`
 - Method references: `System.out::println`
-- Stream operations: `filter()`, `map()`, `forEach()`, `sum()`, `max()`, `min()`
+- Stream operations: `filter()`, `map()`, `forEach()`, `sum()`, `max()`, `min()`, `count()`
 - String operations: `contains()`, filtering by substring
 - Performance analysis: nano-time benchmarks with multiple test cases (small to 1M+ elements)
 - Edge cases: empty arrays, single elements, large datasets
