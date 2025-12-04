@@ -8,6 +8,15 @@ import java.util.Random;
  */
 public class ComparisonUtils {
 
+    private  static final String[] stringSamples= new String[]{
+        "Apple_test", "Banana", "Cherry", "Date", "Elderberry", "Fig_test", "Grape", "Honeydew",
+        "Kiwi", "Lemon_test", "Mango", "Nectarine", "Orange", "Papaya", "Quince", "Raspberry",
+        "Strawberry", "Tangerine", "UgliFruit", "Vanilla", "Watermelon", "Xigua", "Yam", "Zucchini",
+        "Apple","Banana", "Cherry", "Date", "Elderberry", "Fig", "Grape", "Honeydew", "Chocolate", "IceCream",
+        "Pineapple_test", "Coconut", "Blueberry_test", "Blackberry", "Cranberry", "Dragonfruit", "Jackfruit", "Durian", "Lychee", "Rambutan",
+        "Starfruit", "Persimmon", "Clementine", "Currant", "Gooseberry", "Huckleberry", "Salak", "Soursop", "Tamarind", "UvaUrsi", "Ziziphus"
+    };
+
     // Private constructor to prevent instantiation
     private ComparisonUtils() {
         throw new AssertionError("Utility class should not be instantiated");
@@ -73,6 +82,40 @@ public class ComparisonUtils {
             result[i] = rand.nextInt(MAX_ABS * 2 + 1) - MAX_ABS;
         }
         return result;
+    }
+
+    public static void printStrings(String[] strings) {
+        System.out.print("[");
+        for (String str : strings) {
+            System.out.print(str + ",");
+        }
+        System.out.println("]\n");
+    }
+
+    public static String[] getStringArrayWithPatternAtEnd(int size, String pattern) {
+        if (size <= 0) {
+            return new String[0];
+        }
+        Random rand = new Random();
+        // Generate an array of strings with some containing the specified pattern
+        String[] strings = new String[size];
+        for (int i = 0; i < size; i++) {
+            // Get a random index within stringSamples bounds
+            int randomIndex = rand.nextInt(stringSamples.length);
+            String baseString = stringSamples[randomIndex];
+
+            // making it more random
+            if (i % 5 == 0 && rand.nextBoolean()) {
+                strings[i] = baseString + pattern;
+            } else {
+                strings[i] = baseString;
+            }
+        }
+        return strings;
+    }
+
+    public static String[] getStringArray() {
+        return  ComparisonUtils.stringSamples;
     }
 }
 
