@@ -29,6 +29,7 @@ java8/
 │                   ├── Q002_print_evens/            # ✅ Filter even numbers
 │                   ├── Q003_square_nums/            # ✅ Sum of squares
 │                   ├── Q004_max_min/                # ✅ Find max & min
+│                   ├── Q005_print_string/           # ✅ Filter strings by substring
 │                   └── util/
 │                       └── ComparisonUtils.java     # ✅ Shared utilities
 └── target/                          # Compiled output (gitignored)
@@ -62,6 +63,9 @@ mvn -pl java8 exec:java -Dexec.mainClass="com.modernjava.guide.java8.Q003_square
 
 # Run Q004: Max & Min
 mvn -pl java8 exec:java -Dexec.mainClass="com.modernjava.guide.java8.Q004_max_min.MaxMinNumberComparison"
+
+# Run Q005: Filter Strings
+mvn -pl java8 exec:java -Dexec.mainClass="com.modernjava.guide.java8.Q005_print_string.PrintStringsComparison"
 ```
 
 ---
@@ -106,14 +110,15 @@ mvn -pl java8 exec:java -Dexec.mainClass="com.modernjava.guide.java8.Q004_max_mi
 
 ## 📊 Current Status
 
-### Completed Problems (4/4)
+### Completed Problems (5/5)
 - ✅ **Q001:** Print All Numbers - Stream basics, forEach(), method references
 - ✅ **Q002:** Print Even Numbers - filter(), predicates
 - ✅ **Q003:** Sum of Squares - map(), sum(), transformations
 - ✅ **Q004:** Max & Min - max(), min(), Optional handling
+- ✅ **Q005:** Filter Strings by Substring - filter(), contains(), String operations
 
 ### Utility Classes
-- ✅ **ComparisonUtils** - Shared helpers (repeat, formatTime, printNumbers, getArrayOfSpecifiedSize)
+- ✅ **ComparisonUtils** - Shared helpers (repeat, formatTime, printNumbers, printStrings, getArrayOfSpecifiedSize, getStringArrayWithPatternAtEnd)
 
 See **[PROBLEMS.md](PROBLEMS.md)** for detailed problem statements and concepts covered.
 
@@ -127,11 +132,13 @@ Each problem demonstrates:
 3. **Comparison** - Side-by-side execution with performance metrics
 
 ### Key Concepts Covered
-- Lambda expressions: `n -> n % 2 == 0`
+- Lambda expressions: `n -> n % 2 == 0`, `n -> n.contains(substring)`
 - Method references: `System.out::println`
 - Stream operations: `filter()`, `map()`, `forEach()`, `sum()`, `max()`, `min()`
-- Performance analysis: nano-time benchmarks with multiple test cases
+- String operations: `contains()`, filtering by substring
+- Performance analysis: nano-time benchmarks with multiple test cases (small to 1M+ elements)
 - Edge cases: empty arrays, single elements, large datasets
+- Output suppression for large dataset performance testing
 
 ---
 
@@ -179,7 +186,9 @@ See **[Troubleshoot.md](Troubleshoot.md)** for complete error reference.
 - This module uses `<source>1.8</source>` and `<target>1.8</target>` configuration
 - All utility methods are Java 8 compatible (no String.repeat(), no var, etc.)
 - Performance benchmarks include JIT warmup considerations
-- Random array generation uses range -100 to +100 (positive, negative, zero values)
+- Random int array generation uses range -100 to +100 (positive, negative, zero values)
+- Random string array generation uses predefined sample pool with configurable pattern matching
+- Large array outputs (size > 100) are suppressed during comparison tests for readability
 
 ---
 
@@ -187,28 +196,6 @@ See **[Troubleshoot.md](Troubleshoot.md)** for complete error reference.
 - [Root README](../README.md) - Multi-module project overview
 - [Git Best Practices](../docs/GIT_BEST_PRACTICES.md) - Contribution guidelines
 - [Troubleshooting](../docs/TROUBLESHOOTING.md) - Global error reference
-1. **Traditional Solution** - Pre-Java 8 imperative style with loops
-2. **Stream Solution** - Java 8+ functional style with Stream API
-3. **Comparison Runner** - Side-by-side execution with performance metrics
-
-Example problems:
-- **Q001: Print Numbers** - forEach(), method references, lambda expressions (WORKING)
-- **Q002: Sum of Squares** - filter(), map(), reduce() (INCOMPLETE - needs Stream version)
-
-**For detailed structure:** See [LEARNING_STRUCTURE.md](LEARNING_STRUCTURE.md)
-
----
-
-## Java 8 Features & Resources
-
-Features newly included within Java 8: https://www.oracle.com/java/technologies/javase/8-whats-new.html
-
-Key topics to explore:
-- **Stream API**: https://docs.oracle.com/javase/tutorial/collections/streams/
-- **Lambda Expressions**: Functional interfaces and method references
-- **Optional**: Better null handling
-- **Date/Time API**: Modern date and time handling
-- **Default Methods**: Interface evolution
 
 Additional resources:
 - Java learning path: https://docs.oracle.com/javase/tutorial/tutorialLearningPaths.html
